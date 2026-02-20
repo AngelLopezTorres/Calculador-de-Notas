@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
+
 public class Main{
     
     static HashMap<String, ArrayList<Double>> alumnos = new HashMap<>();
@@ -93,5 +97,36 @@ public class Main{
                 System.out.println("Media general: " + (suma / total));
             }
         }
+    }
+
+    public static void mostrarResultado(Scanner sc) {
+        System.out.println("1. Resultado de un alumno");
+        System.out.println("2. Resultado de todos");
+        int opcion = sc.nextInt();
+        sc.nextLine();
+
+        if (opcion == 1) {
+            System.out.print("Nombre del alumno: ");
+            String nombre = sc.nextLine();
+
+            if (!alumnos.containsKey(nombre)) {
+                System.out.println("Alumno no encontrado.");
+                return;
+            }
+
+            double media = calcularMediaAlumno(alumnos.get(nombre));
+            System.out.println(media >= 5 ? "APROBADO" : "SUSPENSO");
+        } else if (opcion == 2) {
+            for (String nombre : alumnos.keySet()) {
+                double media = calcularMediaAlumno(alumnos.get(nombre));
+                System.out.println(nombre + ": " + (media >= 5 ? "APROBADO" : "SUSPENSO"));
+            }
+        }
+    }
+
+    private static double calcularMediaAlumno(ArrayList<Double> notas) {
+        double suma = 0;
+        for (double n : notas) suma += n;
+        return suma / notas.size();
     }
 }
