@@ -24,6 +24,7 @@ public class Main{
                     agregarNota(sc);
                     break;
                 case 2:
+                    calcularMedia(sc);
                     break;
                 case 3:
                     break;
@@ -50,5 +51,47 @@ public class Main{
         alumnos.get(nombre).add(nota);
 
         System.out.println("Nota añadida correctamente.");
+    }
+
+    public static void calcularMedia(Scanner sc) {
+        System.out.println("1. Media de un alumno");
+        System.out.println("2. Media de todos");
+        int opcion = sc.nextInt();
+        sc.nextLine();
+
+        if (opcion == 1) {
+            System.out.print("Nombre del alumno: ");
+            String nombre = sc.nextLine();
+
+            if (!alumnos.containsKey(nombre)) {
+                System.out.println("Alumno no encontrado.");
+                return;
+            }
+
+            ArrayList<Double> notas = alumnos.get(nombre);
+            double suma = 0;
+
+            for (double n : notas) {
+                suma += n;
+            }
+
+            System.out.println("Media de " + nombre + ": " + (suma / notas.size()));
+        } else if (opcion == 2) {
+            double suma = 0;
+            int total = 0;
+
+            for (ArrayList<Double> notas : alumnos.values()) {
+                for (double n : notas) {
+                    suma += n;
+                    total++;
+                }
+            }
+
+            if (total == 0) {
+                System.out.println("No hay notas.");
+            } else {
+                System.out.println("Media general: " + (suma / total));
+            }
+        }
     }
 }
