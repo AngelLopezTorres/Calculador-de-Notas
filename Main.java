@@ -31,6 +31,7 @@ public class Main{
                     calcularMedia(sc);
                     break;
                 case 3:
+                    mostrarResultado(sc)
                     break;
                 case 4:
                     System.out.println("Saliendo del programa...");
@@ -129,4 +130,5 @@ public class Main{
         for (double n : notas) suma += n;
         return suma / notas.size();
     }
+
 }
